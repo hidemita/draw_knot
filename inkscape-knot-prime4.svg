@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -9,35 +7,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 744.09448819 1052.3622047"
-   id="svg2"
+   viewBox="0 0 1000 1000"
+   id="svg4294"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="inkscape-test1.svg">
-  <defs
-     id="defs4" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="-68.842714"
-     inkscape:cy="587.54954"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1035"
-     inkscape:window-x="0"
-     inkscape:window-y="25"
-     inkscape:window-maximized="1" />
+   sodipodi:docname="inkscape-knot-prime4.svg">
   <metadata
-     id="metadata7">
+     id="metadata4304">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -48,14 +24,33 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
+  <defs
+     id="defs4302" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1035"
+     id="namedview4300"
+     showgrid="false"
+     inkscape:zoom="0.857"
+     inkscape:cx="500"
+     inkscape:cy="500"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4294" />
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1">
+     id="g4296">
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 515.71429,719.50506 650,473.79078 412.85714,350.93363 184.28571,468.07649 l 140,251.42857 177.14286,-122.85714 -160,-154.28572 71.42857,-257.14285 68.57143,265.71428 -137.14286,151.42857 z"
-       id="path4136"
-       inkscape:connector-curvature="0" />
+       style="fill:none;stroke:#000000;stroke-width:10px;"
+       d="M550.0,400 L550.0,300 400.0,200 250.0,300 250.0,400 350.0,500 450.0,400 350.0,300 350.0,150 450.0,150 450.0,300 350.0,400 450.0,500 Z"
+       id="path4298" />
   </g>
 </svg>
