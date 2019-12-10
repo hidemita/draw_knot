@@ -1,8 +1,17 @@
 # draw_knot
 
-A small program to generate SVG document that contains a picture of "knot".
+A small program to generate SVG document that contains a diagram of "knot".
 
-# Usage
+## Before use
+
+The program requires jsdom.
+
+```
+npm init
+npm install jsdom
+```
+
+## Usage
 
 ```
 node draw_knot.js svgfile
