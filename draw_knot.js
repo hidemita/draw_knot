@@ -96,8 +96,8 @@ function pathBezier(bezierNode) {
 //
 // create simple svg document with a Catmull-Rom curve
 //
-function draw_svg(endPoints, crossing, viewBox) {
-  let splitSegments = true;
+function draw_svg(endPoints, crossing, crossingSequence, viewBox) {
+  let splitSegments = true;  // turn off if no crossing presentation is necessary.
 
   // create document root and body
   const document = new JSDOM().window.document;
@@ -115,17 +115,27 @@ function draw_svg(endPoints, crossing, viewBox) {
   if (splitSegments) {
     // assign segment levels at crossings
     let segmentLevel = new Array(endPoints.length);
-    let level = 0;
-    for (let i = 0; i < segmentLevel.length; i++) {
-      if (crossing.findIndex(e => (e == i)) < 0) {
-        segmentLevel[i] = level;
-      } else {
-        level = 1 - level;
-        segmentLevel[i] = level;
+    if (crossingSequence.length == 0) {
+      // no crossing sequence is given
+      let level = 0;
+      for (let i = 0; i < segmentLevel.length; i++) {
+        if (crossing.findIndex(e => (e == i)) < 0) {
+          segmentLevel[i] = level;
+        } else {
+          level = 1 - level;
+          segmentLevel[i] = level;
+        }
       }
-    }
-    if (verbose) {
-      console.log("<!-- seg-level: " + segmentLevel + " -->");
+    } else {
+      // crossing sequence is given.
+      crossingSequence.push(crossingSequence[0]);  // append for closed loop
+      let level = crossingSequence.shift();
+      for (let i = 0; i < segmentLevel.length; i++) {
+        segmentLevel[i] = level;
+        if (crossing.findIndex(e => (e == i)) >= 0) {
+          level = crossingSequence.shift();
+        }
+      }
     }
 
     // with bezier curve segments split
@@ -176,10 +186,15 @@ function draw_svg(endPoints, crossing, viewBox) {
 // cui main entry
 //
 if (process.argv.length < 3) {
-  console.log("usage: node draw_knot.js svg_file");
+  console.log("usage: node draw_knot.js svg_file [crossing sequence]");
   process.exit(1);
 }
 
+// get crossing sequence if given
+let crossingSequence = [];
+if (process.argv.length >= 4) {
+  crossingSequence = Array.from(process.argv[3]);
+}
 
 //
 // read inkscape file (SVG) and find end points from "path"
@@ -203,7 +218,6 @@ fs.readFile(process.argv[2], 'utf8', function(error, data) {
 
   // parse path string to get end points
   let pathSentence = path_d.match(/[mzlhvcsqta][0-9\-., ]*/gi)
-  let phrase;
   let points;
   let endPoints = [];
   let x, y;
@@ -211,7 +225,7 @@ fs.readFile(process.argv[2], 'utf8', function(error, data) {
   let yCurrent = 0;
   let cmdPrev = "";
   let cmd = "";
-  for (phrase of pathSentence) {
+  for (let phrase of pathSentence) {
     cmdPrev = cmd;
     cmd = phrase[0];
     if (debug) {
@@ -231,7 +245,6 @@ fs.readFile(process.argv[2], 'utf8', function(error, data) {
       while (y != undefined) {
         xCurrent += +x;
         yCurrent += +y;
-        //console.log("cur: (" + xCurrent + "," + yCurrent + ")");
         endPoints.push([+xCurrent, +yCurrent]);
         x = points.shift();
         y = points.shift();
@@ -247,7 +260,6 @@ fs.readFile(process.argv[2], 'utf8', function(error, data) {
       while (y != undefined) {
         xCurrent = +x;
         yCurrent = +y;
-        //console.log("cur: (" + xCurrent + "," + yCurrent + ")");
         endPoints.push([+xCurrent, +yCurrent]);
         x = points.shift();
         y = points.shift();
@@ -262,7 +274,6 @@ fs.readFile(process.argv[2], 'utf8', function(error, data) {
       x = points.shift();
       y = points.shift();
       while (y != undefined) {
-        //console.log("cur: (" + xCurrent + "," + yCurrent + ")");
         xCurrent += +x;
         yCurrent += +y;
         endPoints.push([+xCurrent, +yCurrent]);
@@ -281,7 +292,6 @@ fs.readFile(process.argv[2], 'utf8', function(error, data) {
       x = points.shift();
       y = points.shift();
       while (y != undefined) {
-        //console.log("cur: (" + xCurrent + "," + yCurrent + ")");
         xCurrent = +x;
         yCurrent = +y;
         endPoints.push([+xCurrent, +yCurrent]);
@@ -326,7 +336,7 @@ fs.readFile(process.argv[2], 'utf8', function(error, data) {
   }
 
   // draw closed spline using CatmullRom
-  let svg_closed_spline = draw_svg(endPoints, crossing, viewBox);
+  let svg_closed_spline = draw_svg(endPoints, crossing, crossingSequence, viewBox);
   console.log(svg_closed_spline);
 });
 
