@@ -32,3 +32,14 @@ node draw_knot.js input.svg 00001111 > output.svg
 ```
 
 this generates a knot with the first four crossings passing with the lower level.
+
+# Exmaples
+
+
+- Prime Knot 3 (input and output)
+
+![prime knot 3](images/prime3.jpg)
+
+- Prime Knot 4 (input and output)
+
+![prime knot 4](images/prime4.jpg)
